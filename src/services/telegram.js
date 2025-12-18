@@ -21,18 +21,6 @@ export const sendToTelegram = async (formData) => {
         })}</i>
     `.trim();
 
-        // Create interactive inline keyboard
-        const keyboard = {
-            inline_keyboard: [
-                [
-                    {
-                        text: '✅ Tasdiqlash',
-                        callback_data: `confirm_${Date.now()}`
-                    }
-                ]
-            ]
-        };
-
         const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
         const response = await fetch(url, {
@@ -44,7 +32,6 @@ export const sendToTelegram = async (formData) => {
                 chat_id: CHAT_ID,
                 text: message,
                 parse_mode: 'HTML',
-                reply_markup: keyboard,
             }),
         });
 
