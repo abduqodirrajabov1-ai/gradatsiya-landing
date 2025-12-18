@@ -5,7 +5,7 @@ const Footer = () => {
         <footer className="footer">
             <div className="footer-content">
                 <div className="footer-text">
-                    <p>© 2024 Phoenix o'quv markazi. Barcha huquqlar himoyalangan.</p>
+                    <p>© 2025 Phoenix o'quv markazi. Barcha huquqlar himoyalangan.</p>
                 </div>
 
                 <div className="footer-links">
