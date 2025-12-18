@@ -1,30 +1,35 @@
 :root {
   /* Color tokens from Phoenix logo */
-  --color-primary: #EA580C;
-  /* Orange-600 */
-  --color-primary-dark: #C2410C;
-  /* Orange-700 */
-  --color-primary-light: #F97316;
-  /* Orange-500 */
-  --color-secondary: #F59E0B;
-  /* Amber-500 (Gold) */
-  --color-secondary-dark: #D97706;
-  /* Amber-600 */
-  --color-secondary-light: #FBBF24;
-  /* Amber-400 */
+  --color-primary: #D32F2F;
+  /* Red */
+  --color-primary-dark: #B71C1C;
+  /* Darker Red */
+  --color-primary-light: #EF5350;
+  /* Lighter Red */
+  --color-secondary: #FFD700;
+  /* Gold */
+  --color-secondary-dark: #F57F17;
+  --color-secondary-light: #FFF176;
 
-  /* Dark mode colors - Phoenix Theme */
-  --color-bg-primary: #1A0500;
-  /* Very dark red/black */
-  --color-bg-secondary: #2A0A05;
-  /* Dark red/brown */
-  --color-bg-tertiary: #3F1008;
-  --color-surface: #270E08;
-  /* Dark reddish surface */
-  --color-surface-elevated: #3A150C;
+  /* Light mode colors - Phoenix Light Theme */
+  --color-bg-primary: #F3F4F6;
+  /* Light Gray */
+  --color-bg-secondary: #E5E7EB;
+  /* Slightly darker gray */
+  --color-bg-tertiary: #D1D5DB;
+  --color-surface: #FFFFFF;
+  /* White surface */
+  --color-surface-elevated: #F9FAFB;
 
-  /* Neutral colors for dark mode */
-  --color-white: #FFFFFF;
+  /* Text colors for light mode */
+  --color-text-primary: #111827;
+  /* Dark Black/Gray */
+  --color-text-secondary: #4B5563;
+  /* Gray */
+  --color-text-tertiary: #6B7280;
+  /* Lighter Gray */
+
+  /* Retain specific gray palette for components that need it */
   --color-gray-50: #F9FAFB;
   --color-gray-100: #E5E7EB;
   --color-gray-200: #D1D5DB;
@@ -35,9 +40,6 @@
   --color-gray-700: #2D3748;
   --color-gray-800: #1F2937;
   --color-gray-900: #111827;
-  --color-text-primary: #F9FAFB;
-  --color-text-secondary: #D1D5DB;
-  --color-text-tertiary: #9CA3AF;
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -69,8 +71,8 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-glow: 0 0 30px rgba(234, 88, 12, 0.4);
-  /* Orange glow */
+  --shadow-glow: 0 0 30px rgba(211, 47, 47, 0.4);
+  /* Red glow */
 
   /* Transitions */
   --transition-fast: 150ms ease-in-out;
@@ -184,7 +186,8 @@ body {
 .form-select {
   width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
-  border: 2px solid var(--color-gray-700);
+  border: 2px solid var(--color-gray-200);
+  /* Lighter border for light mode */
   border-radius: var(--radius-md);
   font-size: var(--font-size-base);
   font-family: var(--font-family);
@@ -197,8 +200,8 @@ body {
 .form-input:focus,
 .form-select:focus {
   border-color: var(--color-primary);
-  /* Focus glow with orange tint */
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+  /* Focus glow with red tint */
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.15);
 }
 
 .form-input::placeholder {

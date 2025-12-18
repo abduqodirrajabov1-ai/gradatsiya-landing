@@ -203,7 +203,7 @@ const RegistrationForm = () => {
                         <br /><br />
                         <strong>Agar kutishni xohlamasangiz, hoziroq qo'ng'iroq qiling:</strong>
                         <br />
-                        <a href="tel:+998903985050" style={{ color: '#065F46', fontWeight: 'bold', fontSize: '1.1em' }}>📞 +998 90 398 50 50</a>
+                        <a href="tel:+998952227227" style={{ color: '#065F46', fontWeight: 'bold', fontSize: '1.1em' }}>📞 +998 95 222 72 27</a>
                     </div>
                 </div>
             )}
@@ -220,7 +220,7 @@ const RegistrationForm = () => {
                         <br /><br />
                         <strong>Iltimos, hoziroq qo'ng'iroq qiling:</strong>
                         <br />
-                        <a href="tel:+998903985050" style={{ color: '#92400E', fontWeight: 'bold', fontSize: '1.1em' }}>📞 +998 90 398 50 50</a>
+                        <a href="tel:+998952227227" style={{ color: '#92400E', fontWeight: 'bold', fontSize: '1.1em' }}>📞 +998 95 222 72 27</a>
                     </div>
                 </div>
             )}
@@ -289,7 +289,7 @@ const RegistrationForm = () => {
                         className="form-input"
                         value="Xitoy tili"
                         disabled
-                        style={{ backgroundColor: 'rgba(234, 88, 12, 0.1)', color: 'var(--color-primary)', fontWeight: 'bold' }}
+                        style={{ backgroundColor: 'rgba(211, 47, 47, 0.1)', color: 'var(--color-primary)', fontWeight: 'bold' }}
                     />
                 </div>
 

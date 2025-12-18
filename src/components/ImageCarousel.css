@@ -17,9 +17,9 @@
     position: relative;
     overflow: hidden;
     border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-xl), 0 0 40px rgba(234, 88, 12, 0.2);
+    box-shadow: var(--shadow-xl), 0 0 40px rgba(211, 47, 47, 0.2);
     background: var(--color-surface);
-    border: 1px solid rgba(234, 88, 12, 0.3);
+    border: 1px solid rgba(211, 47, 47, 0.3);
 }
 
 .carousel-slides {
@@ -39,8 +39,8 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    /* Simulate Phoenix branding on existing images */
-    filter: sepia(0.2) hue-rotate(-15deg) saturate(1.2);
+    /* Slightly brighten images for light theme */
+    filter: brightness(1.05);
 }
 
 .carousel-button {

@@ -31,8 +31,8 @@
     background: var(--color-surface);
     padding: var(--spacing-xl);
     border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-xl), 0 0 40px rgba(234, 88, 12, 0.15);
-    border: 1px solid rgba(234, 88, 12, 0.2);
+    box-shadow: var(--shadow-xl), 0 0 40px rgba(211, 47, 47, 0.15);
+    border: 1px solid rgba(211, 47, 47, 0.2);
     position: relative;
 }
 
@@ -106,12 +106,12 @@
     0%,
     100% {
         transform: scale(1);
-        box-shadow: var(--shadow-xl), 0 0 40px rgba(234, 88, 12, 0.15);
+        box-shadow: var(--shadow-xl), 0 0 40px rgba(211, 47, 47, 0.15);
     }
 
     50% {
         transform: scale(1.01);
-        box-shadow: var(--shadow-xl), 0 0 50px rgba(245, 158, 11, 0.4);
+        box-shadow: var(--shadow-xl), 0 0 50px rgba(255, 215, 0, 0.4);
     }
 }
 
