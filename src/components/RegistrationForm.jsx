@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './RegistrationForm.css';
 import { sendToTelegram } from '../services/telegram';
 
@@ -26,6 +26,7 @@ const RegistrationForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [telegramSent, setTelegramSent] = useState(null); // null, true, or false
     const [errors, setErrors] = useState({});
+    const [shouldRemind, setShouldRemind] = useState(false);
 
     const formatPhoneNumber = (value) => {
         // Remove all non-digit characters
@@ -79,6 +80,34 @@ const RegistrationForm = () => {
         }
     };
 
+    // 15-second reminder system
+    useEffect(() => {
+        const reminderInterval = setInterval(() => {
+            // Check if form is empty or partially filled but not submitted
+            if (!showSuccess && !isLoading) {
+                setShouldRemind(true);
+
+                // Change page title
+                const originalTitle = document.title;
+                document.title = "⏰ Formani to'ldiring!";
+
+                // Focus on first input
+                const nameInput = document.getElementById('name');
+                if (nameInput && !formData.name) {
+                    nameInput.focus();
+                }
+
+                // Reset after 3 seconds
+                setTimeout(() => {
+                    setShouldRemind(false);
+                    document.title = originalTitle;
+                }, 3000);
+            }
+        }, 15000); // Every 15 seconds
+
+        return () => clearInterval(reminderInterval);
+    }, [formData, showSuccess, isLoading]);
+
     const validateForm = () => {
         const newErrors = {};
 
@@ -109,6 +138,9 @@ const RegistrationForm = () => {
         e.preventDefault();
 
         if (validateForm()) {
+            // Reset previous messages when starting new submission
+            setShowSuccess(false);
+            setTelegramSent(null);
             setIsLoading(true); // Start loading
             // Get labels for display
             const cityLabel = CITIES.find(c => c.value === formData.city)?.label || formData.city;
@@ -138,18 +170,7 @@ const RegistrationForm = () => {
             console.log('Form submitted:', formData);
             setShowSuccess(true);
 
-            // Reset form after 5 seconds (increased for reading time)
-            setTimeout(() => {
-                setFormData({
-                    name: '',
-                    city: '',
-                    phone: '',
-                    subject: '',
-                });
-                setShowSuccess(false);
-                setShowWarning(false);
-                setTelegramSent(null);
-            }, 5000);
+            // Don't auto-reset - let message stay until next submission
         }
     };
 
@@ -208,7 +229,7 @@ const RegistrationForm = () => {
                 </div>
             )}
 
-            <form onSubmit={handleSubmit} className="registration-form">
+            <form onSubmit={handleSubmit} className={`registration-form ${shouldRemind ? 'remind-pulse' : ''}`}>
                 <div className="form-group">
                     <label htmlFor="name" className="form-label">
                         Ism

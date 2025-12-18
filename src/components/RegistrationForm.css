@@ -100,6 +100,25 @@
     }
 }
 
+/* Reminder pulse animation */
+@keyframes reminderPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: var(--shadow-xl), 0 0 40px rgba(139, 92, 246, 0.15);
+    }
+
+    50% {
+        transform: scale(1.01);
+        box-shadow: var(--shadow-xl), 0 0 50px rgba(246, 217, 48, 0.4);
+    }
+}
+
+.registration-form.remind-pulse {
+    animation: reminderPulse 1s ease-in-out 3;
+}
+
 /* Animations for form fields */
 .form-input,
 .form-select {
