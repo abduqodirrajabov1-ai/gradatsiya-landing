@@ -7,18 +7,15 @@ const CITIES = [
     { value: 'another', label: 'Boshqa shaharlar' },
 ];
 
-const SUBJECTS = [
-    { value: '', label: 'Fanni tanlang' },
-    { value: 'farmatsevtika', label: 'Farmatsevtika' },
-    { value: 'hamshiralik', label: 'Hamshiralik' },
-];
+// Subject is fixed to Chinese
+const SUBJECT_LABEL = 'Xitoy tili';
 
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
         name: '',
         city: '',
         phone: '',
-        subject: '',
+        subject: 'chinese', // Default fixed subject
     });
 
     const [showWarning, setShowWarning] = useState(false);
@@ -144,14 +141,13 @@ const RegistrationForm = () => {
             setIsLoading(true); // Start loading
             // Get labels for display
             const cityLabel = CITIES.find(c => c.value === formData.city)?.label || formData.city;
-            const subjectLabel = SUBJECTS.find(s => s.value === formData.subject)?.label || formData.subject;
 
             // Send to Telegram
             const telegramData = {
                 name: formData.name,
                 cityLabel,
                 phone: formData.phone,
-                subjectLabel,
+                subjectLabel: SUBJECT_LABEL,
             };
 
             // Send notification to Telegram and track result
@@ -179,7 +175,7 @@ const RegistrationForm = () => {
             <div className="form-header">
                 <h1 className="form-title">Ro'yxatdan o'tish</h1>
                 <p className="form-subtitle">
-                    Gradatsiya o'quv markazida o'qishni boshlash uchun quyidagi ma'lumotlarni to'ldiring
+                    Phoenix o'quv markazida Xitoy tilini o'rganishni boshlash uchun ma'lumotlarni to'ldiring
                 </p>
             </div>
 
@@ -285,23 +281,16 @@ const RegistrationForm = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="subject" className="form-label">
+                    <label className="form-label">
                         Fan
                     </label>
-                    <select
-                        id="subject"
-                        name="subject"
-                        className={`form-select ${errors.subject ? 'error' : ''}`}
-                        value={formData.subject}
-                        onChange={handleChange}
-                    >
-                        {SUBJECTS.map((subject) => (
-                            <option key={subject.value} value={subject.value}>
-                                {subject.label}
-                            </option>
-                        ))}
-                    </select>
-                    {errors.subject && <span className="error-message">{errors.subject}</span>}
+                    <input
+                        type="text"
+                        className="form-input"
+                        value="Xitoy tili"
+                        disabled
+                        style={{ backgroundColor: 'rgba(234, 88, 12, 0.1)', color: 'var(--color-primary)', fontWeight: 'bold' }}
+                    />
                 </div>
 
                 <button type="submit" className="btn btn-primary submit-button" disabled={isLoading}>

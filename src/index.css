@@ -1,18 +1,27 @@
 :root {
-  /* Color tokens from logo */
-  --color-primary: #8B5CF6;
-  --color-primary-dark: #6B21A8;
-  --color-primary-light: #A78BFA;
-  --color-secondary: #F6D930;
-  --color-secondary-dark: #E5C520;
-  --color-secondary-light: #FDE047;
+  /* Color tokens from Phoenix logo */
+  --color-primary: #EA580C;
+  /* Orange-600 */
+  --color-primary-dark: #C2410C;
+  /* Orange-700 */
+  --color-primary-light: #F97316;
+  /* Orange-500 */
+  --color-secondary: #F59E0B;
+  /* Amber-500 (Gold) */
+  --color-secondary-dark: #D97706;
+  /* Amber-600 */
+  --color-secondary-light: #FBBF24;
+  /* Amber-400 */
 
-  /* Dark mode colors */
-  --color-bg-primary: #0F0F1A;
-  --color-bg-secondary: #1A1A2E;
-  --color-bg-tertiary: #16213E;
-  --color-surface: #1E1E2F;
-  --color-surface-elevated: #252539;
+  /* Dark mode colors - Phoenix Theme */
+  --color-bg-primary: #1A0500;
+  /* Very dark red/black */
+  --color-bg-secondary: #2A0A05;
+  /* Dark red/brown */
+  --color-bg-tertiary: #3F1008;
+  --color-surface: #270E08;
+  /* Dark reddish surface */
+  --color-surface-elevated: #3A150C;
 
   /* Neutral colors for dark mode */
   --color-white: #FFFFFF;
@@ -60,7 +69,8 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-glow: 0 0 30px rgba(107, 33, 168, 0.3);
+  --shadow-glow: 0 0 30px rgba(234, 88, 12, 0.4);
+  /* Orange glow */
 
   /* Transitions */
   --transition-fast: 150ms ease-in-out;
@@ -187,7 +197,8 @@ body {
 .form-input:focus,
 .form-select:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(107, 33, 168, 0.1);
+  /* Focus glow with orange tint */
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
 }
 
 .form-input::placeholder {
