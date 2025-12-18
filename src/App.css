@@ -15,7 +15,7 @@
     width: 200%;
     height: 200%;
     background:
-        radial-gradient(circle at 20% 50%, rgba(211, 47, 47, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 20% 50%, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
         radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
     animation: rotate 20s linear infinite;
     z-index: -1;
@@ -73,7 +73,7 @@
 
 .logo:hover {
     transform: scale(1.05);
-    filter: drop-shadow(0 0 15px rgba(211, 47, 47, 0.3));
+    filter: drop-shadow(0 0 15px rgba(255, 107, 0, 0.3));
 }
 
 .right-section {

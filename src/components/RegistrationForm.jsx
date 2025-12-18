@@ -289,7 +289,7 @@ const RegistrationForm = () => {
                         className="form-input"
                         value="Xitoy tili"
                         disabled
-                        style={{ backgroundColor: 'rgba(211, 47, 47, 0.1)', color: 'var(--color-primary)', fontWeight: 'bold' }}
+                        style={{ backgroundColor: 'rgba(255, 107, 0, 0.1)', color: 'var(--color-primary)', fontWeight: 'bold' }}
                     />
                 </div>
 

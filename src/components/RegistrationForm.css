@@ -31,8 +31,8 @@
     background: var(--color-surface);
     padding: var(--spacing-xl);
     border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-xl), 0 0 40px rgba(211, 47, 47, 0.15);
-    border: 1px solid rgba(211, 47, 47, 0.2);
+    box-shadow: var(--shadow-xl), 0 0 40px rgba(255, 107, 0, 0.15);
+    border: 1px solid rgba(255, 107, 0, 0.2);
     position: relative;
 }
 
@@ -106,7 +106,7 @@
     0%,
     100% {
         transform: scale(1);
-        box-shadow: var(--shadow-xl), 0 0 40px rgba(211, 47, 47, 0.15);
+        box-shadow: var(--shadow-xl), 0 0 40px rgba(255, 107, 0, 0.15);
     }
 
     50% {
