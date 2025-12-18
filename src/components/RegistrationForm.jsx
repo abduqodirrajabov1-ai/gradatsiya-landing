@@ -1,31 +1,16 @@
 import { useState } from 'react';
 import './RegistrationForm.css';
+import { sendToTelegram } from '../services/telegram';
 
 const CITIES = [
     { value: 'toshkent', label: 'Toshkent shahri' },
-    { value: 'samarqand', label: 'Samarqand' },
-    { value: 'buxoro', label: 'Buxoro' },
-    { value: 'fargona', label: "Farg'ona" },
-    { value: 'namangan', label: 'Namangan' },
-    { value: 'andijon', label: 'Andijon' },
-    { value: 'qashqadaryo', label: 'Qashqadaryo' },
-    { value: 'surxondaryo', label: 'Surxondaryo' },
-    { value: 'jizzax', label: 'Jizzax' },
-    { value: 'sirdaryo', label: 'Sirdaryo' },
-    { value: 'navoiy', label: 'Navoiy' },
-    { value: 'qoraqalpogiston', label: "Qoraqalpog'iston" },
+    { value: 'another', label: 'Boshqa shaharlar' },
 ];
 
 const SUBJECTS = [
     { value: '', label: 'Fanni tanlang' },
-    { value: 'matematika', label: 'Matematika' },
-    { value: 'fizika', label: 'Fizika' },
-    { value: 'kimyo', label: 'Kimyo' },
-    { value: 'biologiya', label: 'Biologiya' },
-    { value: 'ingliz-tili', label: 'Ingliz tili' },
-    { value: 'rus-tili', label: 'Rus tili' },
-    { value: 'tarix', label: 'Tarix' },
-    { value: 'informatika', label: 'Informatika' },
+    { value: 'farmatsevtika', label: 'Farmatsevtika' },
+    { value: 'hamshiralik', label: 'Hamshiralik' },
 ];
 
 const RegistrationForm = () => {
@@ -38,6 +23,8 @@ const RegistrationForm = () => {
 
     const [showWarning, setShowWarning] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [telegramSent, setTelegramSent] = useState(null); // null, true, or false
     const [errors, setErrors] = useState({});
 
     const formatPhoneNumber = (value) => {
@@ -122,10 +109,36 @@ const RegistrationForm = () => {
         e.preventDefault();
 
         if (validateForm()) {
+            setIsLoading(true); // Start loading
+            // Get labels for display
+            const cityLabel = CITIES.find(c => c.value === formData.city)?.label || formData.city;
+            const subjectLabel = SUBJECTS.find(s => s.value === formData.subject)?.label || formData.subject;
+
+            // Send to Telegram
+            const telegramData = {
+                name: formData.name,
+                cityLabel,
+                phone: formData.phone,
+                subjectLabel,
+            };
+
+            // Send notification to Telegram and track result
+            sendToTelegram(telegramData).then(result => {
+                setIsLoading(false); // Stop loading
+
+                if (result.success) {
+                    console.log('Telegram notification sent successfully');
+                    setTelegramSent(true);
+                } else {
+                    console.error('Failed to send Telegram notification:', result.error);
+                    setTelegramSent(false);
+                }
+            });
+
             console.log('Form submitted:', formData);
             setShowSuccess(true);
 
-            // Reset form after 3 seconds
+            // Reset form after 5 seconds (increased for reading time)
             setTimeout(() => {
                 setFormData({
                     name: '',
@@ -135,7 +148,8 @@ const RegistrationForm = () => {
                 });
                 setShowSuccess(false);
                 setShowWarning(false);
-            }, 3000);
+                setTelegramSent(null);
+            }, 5000);
         }
     };
 
@@ -161,14 +175,35 @@ const RegistrationForm = () => {
                 </div>
             )}
 
-            {showSuccess && (
+            {showSuccess && telegramSent === true && (
                 <div className="alert alert-success">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                         <polyline points="22 4 12 14.01 9 11.01"></polyline>
                     </svg>
                     <div>
-                        <strong>Muvaffaqiyatli!</strong> Arizangiz qabul qilindi. Tez orada siz bilan bog'lanamiz.
+                        <strong>✅ Muvaffaqiyatli yuborildi!</strong> Arizangiz qabul qilindi. Tez orada siz bilan bog'lanamiz.
+                        <br /><br />
+                        <strong>Agar kutishni xohlamasangiz, hoziroq qo'ng'iroq qiling:</strong>
+                        <br />
+                        <a href="tel:+998903985050" style={{ color: '#065F46', fontWeight: 'bold', fontSize: '1.1em' }}>📞 +998 90 398 50 50</a>
+                    </div>
+                </div>
+            )}
+
+            {showSuccess && telegramSent === false && (
+                <div className="alert alert-warning">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <div>
+                        <strong>⚠️ Xabar yuborilmadi!</strong> Arizangiz saqlandi, lekin xabar yuborishda xatolik yuz berdi.
+                        <br /><br />
+                        <strong>Iltimos, hoziroq qo'ng'iroq qiling:</strong>
+                        <br />
+                        <a href="tel:+998903985050" style={{ color: '#92400E', fontWeight: 'bold', fontSize: '1.1em' }}>📞 +998 90 398 50 50</a>
                     </div>
                 </div>
             )}
@@ -248,12 +283,24 @@ const RegistrationForm = () => {
                     {errors.subject && <span className="error-message">{errors.subject}</span>}
                 </div>
 
-                <button type="submit" className="btn btn-primary submit-button">
-                    <span>Ro'yxatdan o'tish</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
+                <button type="submit" className="btn btn-primary submit-button" disabled={isLoading}>
+                    {isLoading ? (
+                        <>
+                            <svg className="loading-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <circle cx="12" cy="12" r="10" opacity="0.25"></circle>
+                                <path d="M12 2 A10 10 0 0 1 22 12" strokeLinecap="round"></path>
+                            </svg>
+                            <span>Yuborilmoqda...</span>
+                        </>
+                    ) : (
+                        <>
+                            <span>Ro'yxatdan o'tish</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </>
+                    )}
                 </button>
             </form>
         </div>
